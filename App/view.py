@@ -26,7 +26,6 @@ from DISClib.ADT import list as lt
 from DISClib.ADT import map as mp
 from App import controller
 from time import process_time
-assert config
 
 """
 La vista se encarga de la interacción con el usuario.
@@ -38,10 +37,10 @@ operación seleccionada.
 # ___________________________________________________
 #  Ruta a los archivos
 # ___________________________________________________
-#detalles = "AllMoviesDetailsCleaned.csv"
-#casting = "AllMoviesCastingRaw.csv"
-detalles = "SmallMoviesDetailsCleaned.csv"
-casting = "MoviesCastingRaw-small.csv"
+detalles = "AllMoviesDetailsCleaned.csv"
+casting = "AllMoviesCastingRaw.csv"
+#detalles = "SmallMoviesDetailsCleaned.csv"
+#casting = "MoviesCastingRaw-small.csv"
 
 
 #___________________________________________________

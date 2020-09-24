@@ -100,7 +100,7 @@ def añadir_compañia(catalogo, movie, compañia):
 
 def añadir_director(catalogo, movie, director):
     C = catalogo["peliculas_por_director"]
-    L = movie["id"]
+    L = movie["\ufeffid"]
     if mp.contains(C, director) == False:
         mp.put(catalogo["peliculas_por_director"], director, [])
     añadir_peliculas_al_director(catalogo, L, director)
@@ -123,7 +123,7 @@ def añadir_actor(catalogo, movie):
         fila = "actor"+str(a)+"_name"
         actor = movie[fila]
         if mp.contains(Ana, movie[fila]):
-            añadir_peliculas_al_actor(catalogo, movie["id"], actor, movie)
+            añadir_peliculas_al_actor(catalogo, movie["\ufeffid"], actor, movie)
         else:
             mp.put(catalogo["peliculas_por_actor"], actor, [])
     

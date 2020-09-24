@@ -73,9 +73,9 @@ def cargar_datos(catalogo, archivo):
         generos = (movie["genres"]).split(sep="|")
 
         pais = movie["production_countries"] #Se obtienen los paises
-        model.añadir_compañia(catalogo, movie, compañia)
-        model.añadir_genero(catalogo, movie, generos)
-        model.añadir_pais(catalogo, movie, pais)
+        #model.añadir_compañia(catalogo, movie, compañia)
+        #model.añadir_genero(catalogo, movie, generos)
+        #odel.añadir_pais(catalogo, movie, pais)
 
 
 def cargar_casting(catalogo, archivo):
@@ -88,7 +88,7 @@ def cargar_casting(catalogo, archivo):
     for movie in input_file:
         director = movie["director_name"]
         model.añadir_director(catalogo, movie, director)
-        model.añadir_actor(catalogo, movie)
+        #model.añadir_actor(catalogo, movie)
 
 
 

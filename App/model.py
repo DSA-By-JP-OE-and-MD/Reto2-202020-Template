@@ -221,7 +221,9 @@ def añadir_peliculas_al_actor(catalogo, idp, actor, movie):
     A = me.getValue(B)
     n = mp.get(catalogo["peliculas_por_actor"], actor)
     M = me.getValue(n)
+    A["Nombre director"] = movie["director_name"]
     M.append(A)
+    
 
 def añadir_peliculas_al_pais(catalogo, idp, pais, movie):
     cat = catalogo["archivo_peliculas"]

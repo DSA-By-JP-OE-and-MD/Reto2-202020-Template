@@ -26,6 +26,7 @@ from DISClib.ADT import list as lt
 from DISClib.ADT import map as mp
 from App import controller
 from time import process_time
+from DISClib.DataStructures import arraylistiterator as it
 
 """
 La vista se encarga de la interacción con el usuario.

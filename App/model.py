@@ -100,7 +100,7 @@ def añadir_compañia(catalogo, movie, compañia):
 
 def añadir_director(catalogo, movie, director):
     C = catalogo["peliculas_por_director"]
-    L = movie["\ufeffid"]
+    L = movie["id"]
     if mp.contains(C, director) == False:
         mp.put(catalogo["peliculas_por_director"], director, [])
     añadir_peliculas_al_director(catalogo, L, director)
@@ -109,7 +109,7 @@ def añadir_director(catalogo, movie, director):
 def añadir_genero(catalogo, movie, generos):
     for a in generos:
         if mp.contains(catalogo["peliculas_por_genero"], a):
-            añadir_peliculas_al_genero(catalogo, movie["\ufeffid"] ,a)
+            añadir_peliculas_al_genero(catalogo, movie["id"] ,a)
         else:
             D = lt.newList("ARRAY_LIST")
             lt.addLast(D, {"titulo":movie["original_title"], "calificacion":float(movie["vote_average"])})
@@ -123,7 +123,7 @@ def añadir_actor(catalogo, movie):
         fila = "actor"+str(a)+"_name"
         actor = movie[fila]
         if mp.contains(Ana, movie[fila]):
-            añadir_peliculas_al_actor(catalogo, movie["\ufeffid"], actor, movie)
+            añadir_peliculas_al_actor(catalogo, movie["id"], actor, movie)
         else:
             mp.put(catalogo["peliculas_por_actor"], actor, [])
     
@@ -131,7 +131,7 @@ def añadir_actor(catalogo, movie):
 def añadir_pais(catalogo, movie, pais):
     if mp.contains(catalogo["peliculas_por_pais"], pais) == True:
         n = mp.get(catalogo["peliculas_por_compañia"], pais)
-        añadir_peliculas_al_pais(catalogo, movie["\ufeffid"], pais, movie)
+        añadir_peliculas_al_pais(catalogo, movie["id"], pais, movie)
     else:
         G = lt.newList("ARRAY_LIST")
         lt.addLast(G, {"titulo":movie["original_title"], "año de lanzamiento":movie["release_date"]})
@@ -228,7 +228,7 @@ def añadir_peliculas_al_pais(catalogo, idp, pais, movie):
 def addmovie(catalogo, movie):
     A = {"titulo":movie["original_title"],
          "calificacion":movie["vote_average"]}
-    mp.put(catalogo["archivo_peliculas"], (movie["\ufeffid"]), A)
+    mp.put(catalogo["archivo_peliculas"], (movie["id"]), A)
 
 
 # ==============================

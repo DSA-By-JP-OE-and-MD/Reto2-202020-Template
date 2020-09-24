@@ -67,6 +67,52 @@ def catalogo():
                                                     comparefunction=comparer)
     return catalogo
 # -----------------------------------------------------
+# API del TAD Catalogo de Peliculas
+# -----------------------------------------------------
+
+def catalogo():
+    catalogo = {"archivo_peliculas": None,
+                "peliculas_por_compañia": None,
+                "Peliculas_por_director": None,
+                "Peliculas_por_genero":None,
+                "peliculas_por_actor":None,
+                "peliculas_por_pais":None}
+
+
+    catalogo["peliculas_por_compañia"] = mp.newMap( numelements=1000,
+                                                    prime=109345121,   
+                                                    maptype='CHAINING', 
+                                                    loadfactor=1.0, 
+                                                    comparefunction=comparer)
+    catalogo["peliculas_por_director"] = mp.newMap( numelements=1000,
+                                                    prime=109345121,   
+                                                    maptype='CHAINING', 
+                                                    loadfactor=1.0, 
+                                                    comparefunction=comparer)
+                                                 
+    catalogo["archivo_peliculas"] = mp.newMap(numelements=1000,
+                                                    prime=109345121,   
+                                                    maptype='CHAINING', 
+                                                    loadfactor=1.0, 
+                                                    comparefunction=comparer)
+    catalogo["peliculas_por_genero"] = mp.newMap(numelements=41,
+                                                    prime=90537484771,   
+                                                    maptype='PROBING', 
+                                                    loadfactor=0.5, 
+                                                    comparefunction=comparer)
+    catalogo["peliculas_por_actor"] = mp.newMap(numelements=2000,
+                                                    prime=109345121,   
+                                                    maptype='CHAINING', 
+                                                    loadfactor=1.0, 
+                                                    comparefunction=comparer)
+    catalogo["peliculas_por_pais"] = mp.newMap(numelements=2000,
+                                                    prime=109345121,   
+                                                    maptype='CHAINING', 
+                                                    loadfactor=1.0, 
+                                                    comparefunction=comparer)
+                                                    
+    return catalogo
+# -----------------------------------------------------
 # API del TAD Catalogo de Libros
 # -----------------------------------------------------
 
@@ -117,10 +163,14 @@ def añadir_actor(catalogo, movie):
             mp.put(catalogo["peliculas_por_actor"], actor, [])
     
 
-
-
-
-
+def añadir_pais(catalogo, movie, pais):
+    if mp.contains(catalogo["peliculas_por_pais"], pais) == True:
+        n = mp.get(catalogo["peliculas_por_compañia"], pais)
+        añadir_peliculas_al_pais(catalogo, movie["id"], pais, movie)
+    else:
+        G = lt.newList("ARRAY_LIST")
+        lt.addLast(G, {"titulo":movie["original_title"], "año de lanzamiento":movie["release_date"]})
+        mp.put(catalogo["peliculas_por_pais"], pais, G)
 
 def calificacion(lista):
     N = 0
@@ -199,6 +249,15 @@ def añadir_peliculas_al_actor(catalogo, idp, actor, movie):
     M = me.getValue(n)
     M.append(A)
 
+def añadir_peliculas_al_pais(catalogo, idp, pais, movie):
+    cat = catalogo["archivo_peliculas"]
+    B = mp.get(cat, idp)
+    A = me.getValue(B)
+    A["Fecha de lanzamiento"] = movie["release_date"]
+    n = mp.get(catalogo["peliculas_por_pais"], pais)
+    M = me.getValue(n)
+    del A["calificacion"]
+    lt.addLast(M, A)
 
 
 def addmovie(catalogo, movie):
@@ -241,6 +300,15 @@ def mostrar_actores(catalogo, Juliana):
     else:
         A ="No existe ese actor en la base de datos"
     return A
+
+def mostrar_paises(catalogo, pais):
+    if mp.contains(catalogo["peliculas_por_pais"], pais):
+        A = mp.get(catalogo["peliculas_por_pais"], pais)
+        A = me.getValue(A)
+    else:
+        A ="No existe ese pais en la base de datos"
+    return A
+
 # ==============================
 # Funciones de Comparacion
 # ==============================

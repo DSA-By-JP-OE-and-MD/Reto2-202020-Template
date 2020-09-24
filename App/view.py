@@ -25,7 +25,8 @@ import config as conf
 from DISClib.ADT import list as lt
 from DISClib.ADT import map as mp
 from App import controller
-from time import process_time 
+from time import process_time
+assert config
 
 """
 La vista se encarga de la interacción con el usuario.
@@ -49,7 +50,13 @@ casting = "MoviesCastingRaw-small.csv"
 #  el controlador.
 # ___________________________________________________
 
-
+def imprimirPeliculasPais(paises):
+    print('Se encontraron: ' + str(lt.size(paises)) + ' peliculas')
+    iterator = it.newIterator(paises)
+    while it.hasNext(iterator):
+        pelicula = it.next(iterator)
+        print(pelicula)
+        print("--------------------")
 
 # ___________________________________________________
 #  Menu principal
@@ -62,6 +69,9 @@ def printMenu():
     print("4- (Req-2)Consultar peliculas por director")
     print("5- (Req-3)Consular peliculas por actor")
     print("6- (Req-4)Consultar peliculas por genero")
+
+    print("7- (Req-5)Consultar peliculas por pais")
+
 
 
 catalogo = None
@@ -103,11 +113,12 @@ while Altair == True:
         print(controller.mostrar_generos(catalogo, monika))
         t2 = process_time()
         print("tiempo de procesado", t2-t1,"segundos")
+    elif int(Monika)== 7:
+        monika = input("Pais que desea buscar: ")
+        t1 = process_time()
+        paises = controller.mostrar_pais(catalogo, monika)
+        t2 = process_time()
+        imprimirPeliculasPais(paises)
+        print("tiempo de procesado", t2-t1,"segundos")
     else:
         Altair = False
-
-
-
-
-
-       

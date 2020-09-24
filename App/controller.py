@@ -127,9 +127,5 @@ def mostrar_actor(catalogo, Misaka):
 
 def mostrar_pais(catalogo, pais):
     N = model.mostrar_paises(catalogo, pais)
-    if N != "No existe ese pais en la base de datos":
-        C = model.calificacionActor(N)
-        return [C, N]
-    else:
-        return N
+    return N
 

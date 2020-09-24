@@ -44,18 +44,18 @@ def catalogo():
                 "peliculas_por_pais":None}
 
 
-    catalogo["peliculas_por_compañia"] = mp.newMap( numelements=300317,
+    catalogo["peliculas_por_compañia"] = mp.newMap( numelements=3317,
                                                     prime=109345121,   
                                                     maptype='CHAINING', 
                                                     loadfactor=1.0, 
                                                     comparefunction=comparer)
-    catalogo["peliculas_por_director"] = mp.newMap( numelements=300317,
+    catalogo["peliculas_por_director"] = mp.newMap( numelements=3317,
                                                     prime=109345121,   
                                                     maptype='CHAINING', 
                                                     loadfactor=1.0, 
                                                     comparefunction=comparer)
                                                  
-    catalogo["archivo_peliculas"] = mp.newMap(numelements=300317,
+    catalogo["archivo_peliculas"] = mp.newMap(numelements=3317,
                                                     prime=109345121,   
                                                     maptype='CHAINING', 
                                                     loadfactor=1.0, 
@@ -65,7 +65,7 @@ def catalogo():
                                                     maptype='PROBING', 
                                                     loadfactor=0.5, 
                                                     comparefunction=comparer)
-    catalogo["peliculas_por_actor"] = mp.newMap(numelements=300317,
+    catalogo["peliculas_por_actor"] = mp.newMap(numelements=3317,
                                                     prime=109345121,   
                                                     maptype='CHAINING', 
                                                     loadfactor=1.0, 
@@ -219,7 +219,6 @@ def añadir_peliculas_al_actor(catalogo, idp, actor, movie):
     cat = catalogo["archivo_peliculas"]
     B = mp.get(cat, idp)
     A = me.getValue(B)
-    A["Nombre director"] = movie["director_name"]
     n = mp.get(catalogo["peliculas_por_actor"], actor)
     M = me.getValue(n)
     M.append(A)
@@ -231,14 +230,16 @@ def añadir_peliculas_al_pais(catalogo, idp, pais, movie):
     A["Fecha de lanzamiento"] = movie["release_date"]
     n = mp.get(catalogo["peliculas_por_pais"], pais)
     M = me.getValue(n)
-    del A["calificacion"]
     lt.addLast(M, A)
 
 
 def addmovie(catalogo, movie):
     A = {"titulo":movie["original_title"],
          "calificacion":movie["vote_average"]}
-    mp.put(catalogo["archivo_peliculas"], (movie['\ufeffid']), A)
+    if "id" in movie:
+        mp.put(catalogo["archivo_peliculas"], (movie['id']), A)
+    elif "\ufeffid" in movie:
+        mp.put(catalogo["archivo_peliculas"], (movie['\ufeffid']), A)
 
 
 # ==============================

@@ -37,10 +37,10 @@ operación seleccionada.
 # ___________________________________________________
 #  Ruta a los archivos
 # ___________________________________________________
-detalles = "AllMoviesDetailsCleaned.csv"
-casting = "AllMoviesCastingRaw.csv"
-#detalles = "SmallMoviesDetailsCleaned.csv"
-#casting = "MoviesCastingRaw-small.csv"
+#detalles = "AllMoviesDetailsCleaned.csv"
+#casting = "AllMoviesCastingRaw.csv"
+detalles = "SmallMoviesDetailsCleaned.csv"
+casting = "MoviesCastingRaw-small.csv"
 
 
 #___________________________________________________

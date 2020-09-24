@@ -44,18 +44,18 @@ def catalogo():
                 "peliculas_por_pais":None}
 
 
-    catalogo["peliculas_por_compañia"] = mp.newMap( numelements=3317,
+    catalogo["peliculas_por_compañia"] = mp.newMap( numelements=300317,
                                                     prime=109345121,   
                                                     maptype='CHAINING', 
                                                     loadfactor=1.0, 
                                                     comparefunction=comparer)
-    catalogo["peliculas_por_director"] = mp.newMap( numelements=3317,
+    catalogo["peliculas_por_director"] = mp.newMap( numelements=300317,
                                                     prime=109345121,   
                                                     maptype='CHAINING', 
                                                     loadfactor=1.0, 
                                                     comparefunction=comparer)
                                                  
-    catalogo["archivo_peliculas"] = mp.newMap(numelements=3317,
+    catalogo["archivo_peliculas"] = mp.newMap(numelements=300317,
                                                     prime=109345121,   
                                                     maptype='CHAINING', 
                                                     loadfactor=1.0, 
@@ -65,7 +65,7 @@ def catalogo():
                                                     maptype='PROBING', 
                                                     loadfactor=0.5, 
                                                     comparefunction=comparer)
-    catalogo["peliculas_por_actor"] = mp.newMap(numelements=3317,
+    catalogo["peliculas_por_actor"] = mp.newMap(numelements=300317,
                                                     prime=109345121,   
                                                     maptype='CHAINING', 
                                                     loadfactor=1.0, 

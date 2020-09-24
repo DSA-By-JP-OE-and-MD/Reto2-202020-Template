@@ -75,7 +75,7 @@ def cargar_datos(catalogo, archivo):
         pais = movie["production_countries"] #Se obtienen los paises
         model.añadir_compañia(catalogo, movie, compañia)
         model.añadir_genero(catalogo, movie, generos)
-        odel.añadir_pais(catalogo, movie, pais)
+        model.añadir_pais(catalogo, movie, pais)
 
 
 def cargar_casting(catalogo, archivo):

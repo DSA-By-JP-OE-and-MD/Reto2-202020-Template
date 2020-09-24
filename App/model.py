@@ -100,7 +100,10 @@ def añadir_compañia(catalogo, movie, compañia):
 
 def añadir_director(catalogo, movie, director):
     C = catalogo["peliculas_por_director"]
-    L = movie['\ufeffid']
+    if "id" in movie:
+        L = movie["id"]
+    elif '\ufeffid' in movie:
+        L = movie['\ufeffid']
     if mp.contains(C, director) == False:
         mp.put(catalogo["peliculas_por_director"], director, [])
     añadir_peliculas_al_director(catalogo, L, director)
@@ -108,7 +111,9 @@ def añadir_director(catalogo, movie, director):
 
 def añadir_genero(catalogo, movie, generos):
     for a in generos:
-        if mp.contains(catalogo["peliculas_por_genero"], a):
+        if mp.contains(catalogo["peliculas_por_genero"], a) and "id" in movie:
+            añadir_peliculas_al_genero(catalogo, movie['id'] ,a)
+        elif mp.contains(catalogo["peliculas_por_genero"], a) and '\ufeffid' in movie:
             añadir_peliculas_al_genero(catalogo, movie['\ufeffid'] ,a)
         else:
             D = lt.newList("ARRAY_LIST")
@@ -122,7 +127,9 @@ def añadir_actor(catalogo, movie):
     for a in range(1, 6):
         fila = "actor"+str(a)+"_name"
         actor = movie[fila]
-        if mp.contains(Ana, movie[fila]):
+        if mp.contains(Ana, movie[fila]) and "id" in movie:
+            añadir_peliculas_al_actor(catalogo, movie['id'], actor, movie)
+        elif mp.contains(Ana, movie[fila]) and "\ufeffid" in movie:
             añadir_peliculas_al_actor(catalogo, movie['\ufeffid'], actor, movie)
         else:
             mp.put(catalogo["peliculas_por_actor"], actor, [])
@@ -131,7 +138,10 @@ def añadir_actor(catalogo, movie):
 def añadir_pais(catalogo, movie, pais):
     if mp.contains(catalogo["peliculas_por_pais"], pais) == True:
         n = mp.get(catalogo["peliculas_por_compañia"], pais)
-        añadir_peliculas_al_pais(catalogo, movie['\ufeffid'], pais, movie)
+        if "id" in movie:
+            añadir_peliculas_al_pais(catalogo, movie["id"], pais, movie)
+        elif '\ufeffid' in movie:
+            añadir_peliculas_al_pais(catalogo, movie['\ufeffid'], pais, movie)
     else:
         G = lt.newList("ARRAY_LIST")
         lt.addLast(G, {"titulo":movie["original_title"], "año de lanzamiento":movie["release_date"]})
